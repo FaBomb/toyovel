@@ -65,10 +65,18 @@ package vendor {
             # filterRoute(route)
             # getHeaders()
         }
-
-        class BladeCompiler {
-
+        class ControllerMakeCommand {
+            # name
+            # type
+            # getStub()
+            # resolveStubPath(stub)
+            # getDefaultNameSpace(rootNamespace)
+            # buildClass(name)
+            # buildFromRequestReplacements(replace, modelClass)
+            # generateFormRequests(modelClass, storeRequestClass, updateRequestClass)
+            # getOptions()
         }
+
         ConsoleKernelContract<|--ConsoleKernel
         ConsoleKernel::getArtisan<|--Artisan
         abstract Input {
@@ -81,9 +89,6 @@ package vendor {
             + parse()
             # parseToken(token, parseOptions)
             - parseArgument(token)
-        }
-        class ConsoleOutput {
-
         }
 
         Input<|--ArgvInput
@@ -109,6 +114,28 @@ package vendor {
             + register(engine, resolver)
             + resolve(engine)
             + forget(engine)
+        }
+        class BladeCompiler {
+            # extensions
+            # conditions
+            # precompilers
+            # path
+            # compilers
+            # rowTags
+            # contentTags
+            # escapedTags
+            # echoFormat
+            # footer
+            # rawBlocks
+            # classComponentNamespaces
+            + compile(path)
+            # appendFilePath()
+            # getOpenAndClosingPhpTokens(contents)
+            + getPath()
+            + setPath(path)
+            + compileString(value)
+            + {static} render(string, data)
+            + {static} renderComponent(component)
         }
         class View {
             # factory
@@ -304,7 +331,5 @@ package vendor {
     }
 
 }
-
-
 
 @enduml
