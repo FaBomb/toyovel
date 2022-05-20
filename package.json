@@ -1,0 +1,33 @@
+{
+  "name": "toyomi_yuta_final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/new-graduate-training/toyomi_yuta_final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/new-graduate-training/toyomi_yuta_final/issues"
+  },
+  "homepage": "https://github.com/new-graduate-training/toyomi_yuta_final#readme",
+  "devDependencies": {
+    "css-loader": "^3.4.2",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss-loader": "^7.0.0",
+    "sass": "^1.51.0",
+    "sass-loader": "^11.1.1",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}
