@@ -23,6 +23,8 @@ class Request {
 
     protected $method;
 
+    protected $action;
+
     /**
      * @param array                $query      The GET parameters
      * @param array                $request    The POST parameters
@@ -53,6 +55,7 @@ class Request {
         $this->pathInfo = self::setPathInfo();
         $this->requestUri = self::setRequestUri();
         $this->method = self::setMethod();
+        $this->action = self::setAction();
         
     }
 
@@ -84,6 +87,18 @@ class Request {
     public function method() {
 
         return $this->method;
+
+    }
+
+    public function setAction() {
+
+        echo $this->pathInfo;
+
+    }
+
+    public function action() {
+
+        return $this->action;
 
     }
 
@@ -125,13 +140,13 @@ class Request {
 
     private function setPathInfo() {
 
-        return rtrim(preg_replace('/\?.*/', '', $this->getUri()), '/');
+        return urldecode(rtrim(preg_replace('/\?.*/', '', $this->getUri()), '/'));
 
     }
 
     private function getUri() {
 
-        return $this->server['REQUEST_URI'];
+        return urldecode($this->server['REQUEST_URI']);
 
     }
 
@@ -164,4 +179,5 @@ class Request {
         return $this->query[$key];
 
     }
+
 }

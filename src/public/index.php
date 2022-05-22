@@ -12,10 +12,10 @@ $app = require_once __DIR__."/../bootstrap/app.php";
 
 $kernel = $app->make(Kernel::class);
 
-$request = Request::capture();
-var_dump($request->all());
+$response = $kernel->handle(
+    $request = Request::capture()
+);
 
-//var_dump($request);
 include "test.html";
 
 ?>
