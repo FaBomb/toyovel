@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ja">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +21,7 @@
                     Toyovel
                 </div>
                 <h1>IndexPage</h1>
+                <h2>{{echo 'test index tenmplate';}}</h2>
  
             </div>
         </div>

@@ -6,7 +6,7 @@ use Illuminate\View\Engine;
 
 class ViewFactory {
 
-    protected $engin;
+    protected $engine;
 
     protected $extensions = [
         'sword.php' => 'sword',
@@ -17,15 +17,12 @@ class ViewFactory {
 
     protected $renderCount = 0;
 
-    public function __construct() {
-
-        $this->engin = new Engine();        
-
-    }
 
     public function make($view, $data) {
 
         $content = $this->getContent($view);
+        
+        $this->engine = new Engine($content, $data);
         $result = $this->view($content, $data);
 
         return $result;
@@ -34,8 +31,8 @@ class ViewFactory {
 
     private function view($content, $data) {
 
-        echo 'gag';
-        return $content;
+        $view = $this->engine->make();
+        return $view;
 
     }
 
