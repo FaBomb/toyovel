@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Routes\\' => array($baseDir . '/routes'),
     'Illuminate\\' => array($vendorDir . '/Framework/Illuminate'),
     'App\\' => array($baseDir . '/app'),
 );

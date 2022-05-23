@@ -17,13 +17,15 @@ class Request {
 
     protected $content;
 
-    protected $pathInfo;
+    public $pathInfo;
 
-    protected $requestUri;
+    public $requestUri;
 
-    protected $method;
+    public $method;
 
-    protected $action;
+    public $action;
+
+    public $parameters = [];
 
     /**
      * @param array                $query      The GET parameters
@@ -56,9 +58,26 @@ class Request {
         $this->requestUri = self::setRequestUri();
         $this->method = self::setMethod();
         $this->action = self::setAction();
+        $this->parameters = self::setParameters();
         
     }
 
+    public function setParameters() {
+
+        $parameters = [];
+        foreach($this->query as $key => $val) {
+
+            if ($key !== '_token' && $key !== '_method') {
+
+                $parameters[$key] = $val;
+
+            }
+
+        }
+        
+        return $parameters;
+
+    }
 
     public static function capture() {
         $request = self::createRequestFromFactory($_GET, $_POST, [],
@@ -92,7 +111,8 @@ class Request {
 
     public function setAction() {
 
-        echo $this->pathInfo;
+        $exploded = explode('/', $this->pathInfo);
+        return end($exploded);
 
     }
 
@@ -140,8 +160,11 @@ class Request {
 
     private function setPathInfo() {
 
-        return urldecode(rtrim(preg_replace('/\?.*/', '', $this->getUri()), '/'));
-
+        $path = urldecode(rtrim(preg_replace('/\?.*/', '', $this->getUri()), '/'));
+        if ($path === '') {
+            return '/';
+        }
+        return $path;
     }
 
     private function getUri() {

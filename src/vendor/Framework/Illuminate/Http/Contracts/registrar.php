@@ -14,6 +14,4 @@ interface Registrar {
     
     public function patch($uri, $action);
     
-    public function match($methods,$uri,  $action);
-
 }

@@ -2,7 +2,9 @@
   "autoload": {
     "psr-4": {
       "App\\": "app",
-      "Illuminate\\": "vendor/Framework/Illuminate"
-    }
+      "Illuminate\\": "vendor/Framework/Illuminate",
+      "Routes\\": "routes"
+    },
+    "files": ["vendor/Framework/Illuminate/Foundation/helpers.php"]
   }
 }

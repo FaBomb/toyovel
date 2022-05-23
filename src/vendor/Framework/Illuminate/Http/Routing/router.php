@@ -2,83 +2,58 @@
 
 namespace Illuminate\Http\Routing;
 
-use Illuminate\Http\Contracts\Registrar;
 use Illuminate\Http\Routing\Route;
 use Illuminate\Http\Routing\ControllerDispatcher;
+use Routes\Web as Routes;
 
-class Router implements Registrar {
+class Router {
 
-    public static $verbs = ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTION'];
+    protected $routes;
 
-    protected $route;
+    protected $current;
 
     protected $currentRequest;
 
     protected $patterns;
 
-    public function addRoute($methods, $uri, $action) {
-
-    }
-
-    public function get($uri, $action) {
-
-    }
-
-    public function post($uri, $action) {
-
-    }
-
-    public function put($uri, $action) {
-
-    }
-
-    public function patch($uri, $action) {
-
-    }
-    
-    public function delete($uri, $action) {
-
-    }
-
-    public function match($methods, $uri, $action) {
-
-    }
-
-    public function view($uri, $data, $status) {
-
+    public function __construct() {
+        
+        $this->routes = Routes::getRoutes();
+        
     }
 
     public function dispatch($request) {
 
         $this->currentRequest = $request;
+        $this->current= $this->getRoute($this->routes);
 
-        $method = $request->method();
-        $uri = $request->pathInfo();
-        $action = $request->action();
-        
-        $this->route = new Route($method, $uri, $action);
-
-        //return $this->dispatchToRoute($request);
+        return $this->dispatchToRoute($request);
 
     }
 
-    public function dispatchToRoute($request) {
+    protected function getRoute($routes) {
 
-        return $this->runRoute($request, $this->findRoute($request));
+        $method = $this->currentRequest->method;    
+        $uri = $this->currentRequest->pathInfo;    
+        $action = $this->currentRequest->action;    
+        $parameters = $this->currentRequest->parameters;
 
-    }
-
-    protected function findRoute($request) {
-
-        $this->current = $route = $this->route->match($request);
+        $route = new Route($method, $uri, $action, $routes, $parameters);
 
         return $route;
 
     }
 
-    protected function runRoute($request, $route) {
+    public function dispatchToRoute($request) {
 
-        return $this->prepareResponse($request, $route->run());
+        return $this->runRoute($request, $this->current);
+
+    }
+
+    protected function runRoute($request, $route) {
+        
+        $route->run();
+       // return $this->prepareResponse($request, $route->run());
 
     }
 
