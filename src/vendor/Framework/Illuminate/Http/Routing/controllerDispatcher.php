@@ -8,6 +8,7 @@ class ControllerDispatcher {
 
         $controller = new $controller;
         $result = $controller->callAction($action, $parameters);
+        var_dump($result);
         return $result;
         
     }

@@ -8,7 +8,13 @@ class TestController extends BaseController {
 
     public function index() {
 
-        return view("testoooo");
+        return view("hello");
+
+    }
+    
+    public function show() {
+
+        return view("test");
 
     }
 
