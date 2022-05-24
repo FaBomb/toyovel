@@ -10,8 +10,11 @@ class Web {
 
         $route = new Route();
 
+        // ルート記述
         $route->get('/', [TestController::class, 'index']);
         $route->get('/show', [TestController::class, 'show']);
+
+        // ---------
 
         return $route;
 

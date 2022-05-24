@@ -22,6 +22,7 @@
                 </div>
                 <h1>IndexPage</h1>
                 <h2>{{echo 'test index tenmplate';}}</h2>
+                <h2>{{echo 'test index tenmplate2';}}</h2>
  
             </div>
         </div>

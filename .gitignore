@@ -24,3 +24,12 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+node_modules/
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.bin

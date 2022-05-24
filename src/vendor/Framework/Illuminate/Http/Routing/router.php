@@ -2,6 +2,7 @@
 
 namespace Illuminate\Http\Routing;
 
+use Illuminate\Http\Message\Response;
 use Illuminate\Http\Routing\Route;
 use Illuminate\Http\Routing\ControllerDispatcher;
 use Routes\Web as Routes;
@@ -51,21 +52,16 @@ class Router {
     }
 
     protected function runRoute($request, $route) {
-        
-        $route->run();
-       // return $this->prepareResponse($request, $route->run());
+
+        return $this->toResponse($request, $route->run());
 
     }
 
-    public function prepareResponse($request, $response) {
+    public static function toResponse($request, $content) {
 
-        return static::toResponse($request, $response);
+        $response = new Response($request, $content);
 
-    }
-
-    public static function toResponse($request, $response) {
-
-        
+        return $response;
 
     }
 

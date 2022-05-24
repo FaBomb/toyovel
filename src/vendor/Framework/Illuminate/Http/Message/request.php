@@ -161,9 +161,13 @@ class Request {
     private function setPathInfo() {
 
         $path = urldecode(rtrim(preg_replace('/\?.*/', '', $this->getUri()), '/'));
+
         if ($path === '') {
+
             return '/';
+
         }
+
         return $path;
     }
 

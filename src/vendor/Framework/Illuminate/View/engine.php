@@ -8,8 +8,6 @@ class Engine {
 
     protected $data;
 
-    public $variables;
-
     public function __construct($content, $data) {
 
         $this->content = $content;
@@ -27,23 +25,41 @@ class Engine {
     private function get() {
 
         $pattern = '/\{\{.*\}\}/';
+
         preg_match_all($pattern, $this->content, $codes);
 
         $results = $this->execute($codes[0]);
-        //$evaledContent = $this->data;
-        $evaledContent = '';
+        
+        $evaledContent = str_replace($codes[0], $results, $this->content);
+
         return $evaledContent;
 
     }
 
     private function execute($codes) {
 
-        $pattern = '/{?<=\{}.*?{?=\}}/';
-        $output = preg_replace($pattern, '', $codes[0]);
-        var_dump($output);
-        $result = 'execute';
-        return $result;
+        $results = [];
+
+        // 変数を使えるようにする
+
+        foreach ($codes as $code) {
+
+            $embbeddedCode = substr($code, 2, strlen($code)-4);
+            
+            ob_start();
+
+            eval($embbeddedCode);
+
+            array_push($results, ob_get_contents());
+
+            ob_end_clean();
+
+
+        }
+
+        return $results;
 
     }
+
 
 }

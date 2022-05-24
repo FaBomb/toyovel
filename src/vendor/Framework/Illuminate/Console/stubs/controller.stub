@@ -1,0 +1,9 @@
+<?php
+
+namespace App\Controllers;
+
+use Illuminate\Http\Routing\Controller as BaseController;
+
+class {{ name }} extends BaseController {
+
+}

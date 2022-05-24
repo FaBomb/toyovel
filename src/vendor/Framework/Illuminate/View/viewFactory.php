@@ -15,9 +15,6 @@ class ViewFactory {
         'ts' => 'file',
     ];
 
-    protected $renderCount = 0;
-
-
     public function make($view, $data) {
 
         $content = $this->getContent($view);
@@ -48,6 +45,8 @@ class ViewFactory {
             $name = $explodedFileName[0];
             $extend = implode('.',array_slice($explodedFileName, 1));
             
+            
+
             if ($name === $view) {
 
                 return file_get_contents($file);
