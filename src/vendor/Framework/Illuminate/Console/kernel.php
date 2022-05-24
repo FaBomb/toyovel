@@ -2,7 +2,7 @@
 
 namespace Illuminate\Console;
 
-use Exception;
+use Illuminate\Database\Migrations\Kernel as MigrationKernel;
 
 class Kernel {
 
@@ -13,7 +13,9 @@ class Kernel {
     public $commands = [
         'make:controller'=>'makeController',
         'make:model'=>'makeModel',
-        'make:view'=>'makeView'
+        'make:view'=>'makeView',
+        'make:migration'=>'makeMigration',
+        'migrate'=>'migrate'
     ];
 
     public function handle($inputArgvs) {
@@ -29,13 +31,13 @@ class Kernel {
             $this->fileName = $inputArgvs[2];    
 
         }
-
+        
         $this->getCommand($this->command);
 
     }
 
     private function getCommand($arg) { 
-
+        
         if (isset($this->commands[$arg])) {
 
             $command = $this->commands[$arg];
@@ -49,8 +51,18 @@ class Kernel {
 
     }
 
-    private function makeController() {
+    private function migrate() {
 
+        
+        $migrationFiles = glob(dirname(__DIR__, 4).'/app/Migrations/*');
+        $migrationFile = end($migrationFiles);
+
+        $migration = require_once $migrationFile;
+        $migration->up();
+
+    }
+
+    private function makeController() {
 
         $fileName = $this->fileName;
         $createPath = dirname(__FILE__, 5).'/app/Controllers/';
@@ -80,15 +92,37 @@ class Kernel {
 
     }
 
+    private function makeMigration() {
+
+        $fileName = $this->fileName;
+        $createPath = dirname(__FILE__, 5).'/app/Migrations/';
+        $stubPath = dirname(__FILE__).'/stubs/migration.stub';
+
+        $this->makeFile($fileName, $createPath, $stubPath, 'migration');
+        
+    }
+
     private function makeFile($name, $createPath, $stubPath, $type) {
 
         $file = $name.'.php';
         $newfilePath = $createPath.$file;
         $content = file_get_contents($stubPath);
 
-        if ($type === 'controller' || $type == 'model') {
+        if ($type !== 'view' ) {
+            
+            $convertName = ucwords($name);
+            if ($type === 'migration') {
 
-            $content = $this->inssertName(ucwords($name),$content);
+                $convertName = $name;
+
+            }
+            $content = $this->inssertName($convertName, $content);
+
+        }
+
+        if ($type === 'migration') {
+
+            $newfilePath = $createPath.date('Y_m_d_H_i_s_').'migration.php';
 
         }
         
