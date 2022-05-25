@@ -18,9 +18,10 @@
  
             <div class="content">
                 <h1>Toyovel</h1>
-                <h1>ShowPage</h1>
-                <h2>{{$yamada}}</h2>
-                <h2>{{$toyomi}}</h2>
+                <h2>ShowPage</h2>
+                <h3>Name: {{$name}}</h3>
+                <h3>Birthday: {{$birthday}}</h3>
+                <h3>Sex: {{$sex}}</h3>
             </div>
         </div>
     </body>
