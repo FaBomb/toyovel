@@ -16,7 +16,18 @@ abstract class Model {
         $table = mb_strtolower(end($exploded));
         $sql = "INSERT INTO {$table} ({$columns}) VALUES ($values)";
 
-        self::pdo($sql);
+        $lastId = self::pdo($sql)['lastId'];
+        return $lastId;
+
+    }
+
+    public static function get($id) {
+
+        $exploded = explode('\\', static::class);
+        $table = mb_strtolower(end($exploded));
+        $sql = "SELECT * FROM {$table} WHERE id = {$id};";
+
+        return self::pdo($sql)['state']->fetch();
 
     }
 
@@ -26,6 +37,10 @@ abstract class Model {
 
             DBX::connect();
             $state = DBX::$pdo->query($sql);
+            $lastId = DBX::$pdo->lastInsertId();
+           
+            $result = ['state'=>$state, 'lastId'=>$lastId];
+            return $result;
 
         } catch(\PDOException $e) {
 

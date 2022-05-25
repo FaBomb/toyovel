@@ -17,11 +17,10 @@
         <div class="flex-center position-ref full-height">
  
             <div class="content">
-                <div class="title m-b-md">
-                    Toyovel
-                </div>
-                <h1>TestPage</h1>
- 
+                <h1>Toyovel</h1>
+                <h1>ShowPage</h1>
+                <h2>{{$yamada}}</h2>
+                <h2>{{$toyomi}}</h2>
             </div>
         </div>
     </body>

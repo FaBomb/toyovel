@@ -19,17 +19,22 @@ class TestController extends BaseController {
 
     }
     
-    public function show() {
+    public function show($request, $parameters) {
 
-        return view("test");
+        $data = Testmodel::get($parameters['id']);
+
+        $yamada = $data['yamada'];
+        $toyomi = $data['toyomi'];
+
+        return view("test", compact('yamada', 'toyomi'));
 
     }
 
     public function create($request) {
 
-        Testmodel::create(['yamada'=>$request['yamada'], 'toyomi'=>$request['toyomi']]);
+        $id = Testmodel::create(['yamada'=>$request['yamada'], 'toyomi'=>$request['toyomi']]);
 
-        redirect('/show');
+        redirect('/show?id='.$id);
 
     }
 

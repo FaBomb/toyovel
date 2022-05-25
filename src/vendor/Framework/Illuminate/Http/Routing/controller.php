@@ -7,7 +7,8 @@ abstract class Controller {
     public function callAction($method, $parameters, $request) {
 
         //parametersの意味がなしてない。。。取り合えずリクエストから
-        return $this->$method($request);
+        return $this->$method($request, $parameters);
+
 
     }
 
