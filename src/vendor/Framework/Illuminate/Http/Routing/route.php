@@ -20,13 +20,16 @@ class Route {
 
     public $routes;
 
-    public function __construct($method, $uri, $action, $routes, $parameters) {
+    public $request;
+
+    public function __construct($method, $uri, $action, $routes, $parameters, $request) {
 
         $this->method = $method;
         $this->uri = preg_split('/\{/', $uri)[0];
         $this->action['all'] = $action;
         $this->routes = $routes;
         $this->parameters = $parameters;
+        $this->request = $request;
 
     }
 
@@ -39,7 +42,7 @@ class Route {
     protected function runController() {
 
         $this->setContainer();
-        return $this->controllerDispatcher()->dispatch($this->getController(), $this->getAction(), $this->getParameters());
+        return $this->controllerDispatcher()->dispatch($this->getController(), $this->getAction(), $this->getParameters(), $this->request);
         
     }
 

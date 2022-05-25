@@ -39,7 +39,7 @@ class Router {
         $action = $this->currentRequest->action;    
         $parameters = $this->currentRequest->parameters;
 
-        $route = new Route($method, $uri, $action, $routes, $parameters);
+        $route = new Route($method, $uri, $action, $routes, $parameters, $this->currentRequest);
 
         return $route;
 

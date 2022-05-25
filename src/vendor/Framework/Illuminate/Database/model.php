@@ -11,7 +11,7 @@ abstract class Model {
     public static function create($addData) {
 
         $columns = implode(', ', array_keys($addData));
-        $values = '\''.implode("', '", array_keys($addData)).'\'';
+        $values = '\''.implode("', '", array_values($addData)).'\'';
         $exploded = explode('\\', static::class);
         $table = mb_strtolower(end($exploded));
         $sql = "INSERT INTO {$table} ({$columns}) VALUES ($values)";

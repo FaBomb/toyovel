@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Illuminate\Http\Routing\Controller as BaseController;
 use App\Models\Testmodel;
+use Illuminate\Http\Message\Request;
 
 class TestController extends BaseController {
 
@@ -24,10 +25,11 @@ class TestController extends BaseController {
 
     }
 
-    public function create() {
+    public function create($request) {
 
+        Testmodel::create(['yamada'=>$request['yamada'], 'toyomi'=>$request['toyomi']]);
 
-        //Testmodel::create(['yamada'=>'engineer', 'toyomi'=>'hen']);
+        redirect('/show');
 
     }
 
