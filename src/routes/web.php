@@ -13,6 +13,7 @@ class Web {
         // ルート記述
         $route->get('/', [TestController::class, 'index']);
         $route->get('/show', [TestController::class, 'show']);
+        $route->put('/create', [TestController::class, 'create']);
 
         // ---------
 

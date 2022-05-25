@@ -21,9 +21,17 @@
                     Toyovel
                 </div>
                 <h1>IndexPage</h1>
-                <h2>{{echo 'test index tenmplate';}}</h2>
-                <h2>{{echo 'test index tenmplate2';}}</h2>
- 
+                <h2>{{$test1}}</h2>
+                <h2>{{$test2}}</h2>
+                <h2>{{$test3}}</h2>
+                <form action="/create" method="post" class="form-example">
+                    <label for="name">Enter your name: </label><br>
+                    <input type="text" name="yamada" id="name" required><br>
+                    <input type="text" name="toyomi" id="name" required><br>
+                    <input type="hidden" value="{{ csrf_token  }}" name="_token"/>
+                    <input type="hidden" value="put" name="_method"/>
+                    <button type="submit">submit</button>
+                </form>
             </div>
         </div>
     </body>

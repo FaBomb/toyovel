@@ -33,7 +33,7 @@ class Blueprint {
     }
     public function timestamp($name) {
 
-        $column = "{$name} TIMESTAMP";
+        $column = "{$name} TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
         array_push($this->columns, $column);
 
     } 
@@ -45,7 +45,6 @@ class Blueprint {
 
             DBX::connect();
             $state = DBX::$pdo->query($this->sql);
-            var_dump($state);
 
         } catch(\PDOException $e) {
 

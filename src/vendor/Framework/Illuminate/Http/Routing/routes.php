@@ -10,7 +10,7 @@ class Routes implements Registrar {
     public array $routes; 
 
     public function __construct() {
-        
+
     }
 
     public function get($uri, $action) {

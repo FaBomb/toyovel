@@ -69,6 +69,7 @@ class Route {
 
     protected function getAction() {
 
+
         if (array_key_exists(1, $this->container)) {
 
             $this->action = $this->container[1];
