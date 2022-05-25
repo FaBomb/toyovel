@@ -33,3 +33,9 @@ node_modules/
 *.o
 *.so
 *.bin
+
+package-lock.json
+package.json
+src/composer.lock
+src/public/bundle.js
+src/vendor/Composer/
